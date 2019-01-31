@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"	
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+     
+<h:head>
+	<title>Shop Owner Add Items</title>
+	 <link rel="stylesheet" type="text/css" href="styles.css"/>
+	
+</h:head>
+ 
+<body> 
+    <h:form>
+	    <h:commandButton action ="index" value ="Sign Out"/>
+	</h:form>
+	<h:form>
+		<br/><br/>		
+		
+		<h:outputText value="Item*: "/>
+		<h:inputText id="item" value="#{ownerMenuBean.menu.item}" required="true"  onchange="submit()"/>  <br/><br/>
+    </h:form>
+    <h:form>
+		<h:outputText value="Price*: "/>
+		<h:inputText id="price" value="#{ownerMenuBean.menu.price}" required="true" onchange="submit()">
+			<f:event type="postValidate" listener="#{ownerMenuBean.validatePrice}"/>
+		</h:inputText>
+		<h:message for="price"/>
+		<br/><br/>
+	</h:form>
+	<h:form>	
+		<h:outputText value="Description*: " />
+		<h:inputText id="description" value="#{ownerMenuBean.menu.description}" required="true" onchange="submit()"/> 	<br/><br/>
+	</h:form>
+	<h:form>	
+		<h:dataTable
+		 styleClass="order-table"
+    					headerClass="order-table-header"
+    					rowClasses="order-table-odd-row,otlob-table-even-row"	
+		
+		 value="#{ownerMenuBean.allItems}" var="menuItem">
+			<h:column border-spacing="15px">
+				<f:facet name="header"> Item </f:facet>
+				#{menuItem.item}	
+			</h:column>
+			
+			<h:column border-spacing="15px">
+				<f:facet name="header"> Price </f:facet>
+				#{menuItem.price}	
+			</h:column>
+			
+			<h:column border-spacing="15px">
+				<f:facet name="header"> Description </f:facet>
+				#{menuItem.description}	
+			</h:column>
+		</h:dataTable>
+	</h:form>
+	<h:form>
+		<h:commandButton action ="#{ownerMenuBean.addItem}" value ="Add Item" onchange="submit()">
+				  <f:param name="shopOwnerEmail" value="#{ownerMenuBean.ownerEmail}" />
+		</h:commandButton>
+		<br/><br/>		
+	</h:form>
+</body> 
+</html>

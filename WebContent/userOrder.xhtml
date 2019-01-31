@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<title>User Order Selection Page</title>
+	<SCRIPT LANGUAGE="JavaScript">
+          function priceAlert() {
+        	  "#{userOrderBean.calculatePrice()}";
+        	  alert("Your order costs: " + "#{userOrderBean.orderPrice}");
+		  }
+	</SCRIPT>
+<link rel="stylesheet" type="text/css" href="styles.css"/>
+</h:head>
+
+
+<body> 
+	<h:form>
+	    <h:commandButton action ="index" value ="Sign Out"/><br/>
+		<p id="pageHead">#{msgs.user2Msg}</p><br/>
+		
+		<h:dataTable 
+		styleClass="order-table"
+    					headerClass="order-table-header"
+    					rowClasses="order-table-odd-row,otlob-table-even-row"
+		
+		value="#{userOrderBean.allMenuItems}" var="menuItem">
+			<h:column>
+				<f:facet name="header"> </f:facet>
+				<h:selectBooleanCheckbox label="#{menuItem.item}" value="#{userOrderBean.selectedItems[menuItem.item]}" onclick="submit()"/>	
+			</h:column>
+			
+			<h:column width="10%">
+				<f:facet name="header"> Item </f:facet>
+				#{menuItem.item}	
+			</h:column>
+			
+			<h:column width="10%">
+				<f:facet name="header"> Price </f:facet>
+				#{menuItem.price}	
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header"> Description </f:facet>
+				#{menuItem.description}	
+			</h:column>
+		</h:dataTable>
+		<br/><br/>
+		
+		<h:commandButton value ="Order" onclick="priceAlert()">
+		</h:commandButton>
+	</h:form>
+</body> 
+</html>

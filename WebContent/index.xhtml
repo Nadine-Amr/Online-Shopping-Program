@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Home Page</title>
+</h:head>
+ 
+<body> 
+
+	<h:form>
+		<p id="pageHead">#{msgs.welcomeMsg}</p><br/>
+
+		<h:outputText value="Name*: " />
+		<h:inputText id="name" value="#{accountBean.account.name}" required="true"  onchange="submit()">
+		  <f:event type="postValidate" listener="#{accountBean.validateName}"/>
+		</h:inputText>
+		<h:message for="name"/>
+		<br/><br/>
+	</h:form>
+		
+	<h:form>
+		<h:outputText value="Phone: " />
+		<h:inputText id="phone" value="#{accountBean.account.phone}" required="false" onchange="submit()">
+		  <f:event type="postValidate" listener="#{accountBean.validatePhone}"/>
+		</h:inputText>
+		<h:message for="phone"/>
+		<br/><br/>
+	</h:form>
+		
+	<h:form>
+		<h:outputText value="Password*: " />
+		<h:inputSecret id="password" value="#{accountBean.account.password}" required="true" redisplay="true" onchange="submit()">
+		  <f:event type="postValidate" listener="#{accountBean.validatePassword}"/>
+		</h:inputSecret>
+		<h:message for="password"/>
+		<br/><br/>
+	</h:form>
+	
+	<h:form>
+		<h:outputText value="Email*: " />
+		<h:inputText id="email" value="#{accountBean.account.email}" required="true" onchange="submit()">
+		</h:inputText>
+		<br/><br/>
+		Type*:
+		<h:selectOneMenu id="type" value="#{accountBean.account.type}" required="true" onchange="submit()">
+			<f:selectItem itemLabel="Select Type" noSelectionOption="true" />
+			<f:selectItem itemValue="1" itemLabel="User"/>
+			<f:selectItem itemValue="2" itemLabel="Shop Owner"/>
+		</h:selectOneMenu>
+		<br/><br/>
+	</h:form>
+	
+	<h:form>
+		<h:commandButton action ="#{accountBean.signUp}" value ="Sign up">
+			<f:param name="shopOwnerEmail" value="#{accountBean.account.email}" />
+		</h:commandButton>
+		<h:commandButton action ="#{accountBean.signIn}" value ="Sign in">
+			<f:param name="shopOwnerEmail" value="#{accountBean.account.email}" />
+		</h:commandButton>
+		<h:messages globalOnly="true" />
+	</h:form>
+</body> 
+</html>
+  

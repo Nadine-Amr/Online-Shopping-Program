@@ -1,0 +1,17 @@
+.order-table{   
+	border-collapse:collapse;
+	 border:2px solid #000000;
+	
+}
+
+.order-table-header{
+	text-align:center;
+	background:none repeat scroll 0 0 #E5E5E5;
+	border:2px solid #000000;
+	padding:16px;
+}
+
+error{
+    color: orange;
+	
+}
